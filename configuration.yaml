@@ -30,6 +30,8 @@ remote_homeassistant:
         - state_changed
         - sevice_registered
 
+homeassistant:
+  packages: !include_dir_named packages/
 
 # Text to speech
 tts:
@@ -39,7 +41,6 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
-packages: !include_dir_named packages/
  
 alarm_control_panel:
 binary_sensor:
