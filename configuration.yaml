@@ -1,0 +1,55 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+http:
+  server_port: 8122
+
+remote_homeassistant:
+  instances:
+    - host: 192.168.100.101
+      access_token: !secret pandemicabin_token
+      entity_prefix: "pancab_"
+      exclude:
+        domains:
+          - device_tracker
+          - zone
+          - person
+      subscribe_events:
+        - state_changed
+        - sevice_registered
+    - host: 192.168.40.159
+      access_token: !secret nht_token
+      entity_prefix: "nht_"
+      exclude:
+        domains:
+          - device_tracker
+          - zone
+          - person
+      subscribe_events:
+        - state_changed
+        - sevice_registered
+
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+ 
+alarm_control_panel:
+binary_sensor:
+camera:
+climate:
+input_boolean:
+input_datetime:
+input_number:
+input_select:
+light:
+media_player:
+sensor:
+switch:
+weather:
