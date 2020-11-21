@@ -1,5 +1,5 @@
 shell_command:
-  git_pull: 'git pull origin'
+  git_pull: 'git pull origin master'
 
 script:
  git_pull:
