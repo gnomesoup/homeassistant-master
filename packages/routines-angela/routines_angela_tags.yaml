@@ -6,12 +6,12 @@ automation:
         tag_id: 545ed46c-50f4-4e91-b847-76f13ea0a487
     condition: []
     action:
-      - service: notify.mobile_app_ergisch
-        data:
-          title: "Panemicabin"
-          message: "Angie is awake"
       - service: tts.google_translate_say
         data:
           entity_id:
             - media_player.pancab_living_room_speaker
           message: "Bring Angie Coffee"
+      - service: notify.mobile_app_ergisch
+        data:
+          title: "Panemicabin"
+          message: "Angie is awake"
