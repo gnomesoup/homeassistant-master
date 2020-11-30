@@ -1,0 +1,35 @@
+automation:
+  - id: '1606702211014'
+    alias: 'Pandemicabin notify when away'
+    trigger:
+      - platform: template
+        value_template: >-
+          {{ distance('zone.home', 'device_tracker.ergisch') >= 60 }}
+        for: "00:30:00"
+    condition:
+      - condition: state
+        entity_id:
+          - input_boolean.pancab_heat_away
+        state: 'off'
+    action:
+      - service: notify.grown_ups
+        data:
+          title: "Panemicabin Alert"
+          message: "It appears you have left. Set the heat to away"
+  - id: '1606704077554'
+    alias: 'Pandemicabin notify when getting close'
+    trigger:
+      - platform: template
+        value_template: >-
+          {{ distance('zone.home', 'device_tracker.ergisch') >= 80 }}
+        for: "00:15:00"
+    condition:
+      - condition: state
+        entity_id:
+          - input_boolean.pancab_heat_away
+        state: 'on'
+    action:
+      - service: notify.grown_ups
+        data:
+          title: "Panemicabin Alert"
+          message: "It appears you are heading here. You might want to make it warmer"
