@@ -4,8 +4,9 @@ automation:
     trigger:
       - platform: template
         value_template: >-
-          {{ distance('zone.home', 'device_tracker.ergisch') >= 60 }}
-        for: "00:30:00"
+          {{ distance('zone.cabin', 'device_tracker.ergisch') >= 60 and
+             distance('zone.cabin', 'device_tracker.iphone') >= 60 }}
+        for: "00:45:00"
     condition:
       - condition: state
         entity_id:
@@ -21,7 +22,8 @@ automation:
     trigger:
       - platform: template
         value_template: >-
-          {{ distance('zone.home', 'device_tracker.ergisch') >= 80 }}
+          {{ distance('zone.cabin', 'device_tracker.ergisch') <= 80 or
+             distance('zone.cabin', 'device_tracker.iphone') <= 80 }}
         for: "00:15:00"
     condition:
       - condition: state
