@@ -1,0 +1,18 @@
+notify:
+  - name: michael
+    platform: group
+    services:
+      - service: mobile_app_ergisch
+  - name: angela
+    platform: group
+    services:
+      - service: mobile_app_iphone
+  - name: camille
+    platform: group
+    services:
+      - service: mobile_app_moto_g_7_play
+  - name: grown_ups
+    platform: group
+    services:
+      - service: mobile_app_ergisch
+      - service: mobile_app_iphone
