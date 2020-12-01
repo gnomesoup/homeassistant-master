@@ -30,8 +30,13 @@ automation:
         entity_id:
           - input_boolean.pancab_heat_away
         state: 'on'
+      - condition: numeric_state
+        entity_id: 
+          - sensor.nht_temperature_whole_house
+          - input_number.pancab_heat_auto_setpoint
+        below: '{{ states("input_number.pancab_heat_auto_setpoint") - 2}}'
     action:
       - service: notify.grown_ups
         data:
           title: "Panemicabin Alert"
-          message: "It appears you are heading here. You might want to make it warmer"
+          message: "It appears you are heading to the cabin. You might want to make it warmer."
