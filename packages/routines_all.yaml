@@ -32,9 +32,8 @@ automation:
         state: 'on'
       - condition: numeric_state
         entity_id: 
-          - sensor.nht_temperature_whole_house
-          - input_number.pancab_heat_auto_setpoint
-        below: '{{ states("input_number.pancab_heat_auto_setpoint") - 2}}'
+          - sensor.pancab_temperature_overall
+        below: 67
     action:
       - service: notify.grown_ups
         data:
