@@ -16,3 +16,24 @@ notify:
     services:
       - service: mobile_app_ergisch
       - service: mobile_app_iphone
+
+automation:
+  - id: '1607566508232'
+    alias: Notify when remote connection is down
+    trigger:
+      - platform: state
+        entity_id: 
+          - sensor.remote_connection_to_192_168_100_101_8123
+          - sensor.remote_connection_to_192_168_40_159_8123
+        for: 00:00:30
+    action:
+      - service: notify.michael
+        data:
+          title: 'Master HA Alert'
+          message: >-
+            {%- if trigger.entity_id == 'sensor.remote_connection_to_192_168_100_101_8123' -%}
+            {%- set connectionName = 'Pandemicabin' -%}
+            {%- else -%}
+            {%- set connectionName = 'North Harbor Tower' -%}
+            {%- endif -%}
+            {{connectionName}} is {{ trigger.to_state.state }}.
