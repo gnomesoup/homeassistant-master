@@ -1,3 +1,2 @@
 sensor:
   - platform: uptime
-    name: Startup Time
