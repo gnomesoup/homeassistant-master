@@ -1,4 +1,50 @@
+input_select:
+  closest_home_michael:
+    name: 'Closest Home Michael'
+    options:
+      - 'North Harbor Tower'
+      - 'Pandemicabin'
+
 automation:
+  - id: '1608339069146'
+    alias: 'Set closest home'
+    variables:
+      current_zone: >-
+        {% if states('input_select.closest_home_michael') == 'Pandemicabin' -%}
+        zone.cabin
+        {%- else -%}
+        zone.home
+        {%- endif %}
+      closest_zone: >-
+        {{ closest(person.michael, states.zone).entity_id }}
+    trigger:
+      - platform: state
+        entity_id: 
+          - person.michael
+    condition:
+      - condition: template
+        value_template: >-
+          {{ closest_zone =! current_zone }}
+    action:
+      - service: input_select.set_options
+        data:
+          entity_id: input_select.closest_home_michael
+          option: >-
+            {% if closest_zone == 'zone.cabin' %}
+            Pandemicabin
+            {% else %}
+            North Harbor Tower
+            {%- endif %}
+  # - id: '1608344953300'
+  #   alias: 'Notify when away from Pandemicabin'
+  #   trigger:
+  #     - platform: state
+  #       entity_id: entity id
+  #       from:  from state
+  #       to:  to state
+  #   condition:
+  #   action:
+
   - id: '1606702211014'
     alias: 'Pandemicabin notify when away'
     trigger:
