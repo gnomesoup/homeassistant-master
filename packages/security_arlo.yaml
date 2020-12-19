@@ -44,6 +44,7 @@ switch:
     siren_duration: 10
 
 automation:
+
   # Keep arlo alarm states in sync with manual alarm panel
   - id: '1607362322426'
     alias: NHT Aarlo alarm set from main alarm
@@ -69,6 +70,7 @@ automation:
           {% else %}
           alarm_control_panel.alarm_disarm
           {% endif %}
+
   - id: '1607363586435'
     alias: Pandemicabin Aarlo alarm set from main alarm
     trigger:
