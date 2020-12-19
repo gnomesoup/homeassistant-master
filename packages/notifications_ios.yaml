@@ -1,0 +1,35 @@
+ios:
+  push:
+    categories:
+      - name: Alarm
+        identifier: 'alarm'
+        actions:
+          - identifier: 'SOUND_ALARM'
+            title: 'Sound Alarm'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: true
+            behavior: 'default'
+          - identifier: 'SILENCE_ALARM'
+            title: 'Silence Alarm'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: false
+            behavior: 'textInput'
+            textInputButtonTitle: 'Silencio!'
+            textInputPlaceholder: 'Placeholder'
+      - name: Pandemicabin Away
+        identifier: 'pandemicabin_away'
+        actions:
+          - identifier: 'AWAY_LONG_TERM'
+            title: 'Leaving for awhile'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: false
+            behavior: 'default'
+          - identifier: 'AWAY_SHORT_TERM'
+            title: 'Back in a bit'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: false
+            behavior: 'default'
