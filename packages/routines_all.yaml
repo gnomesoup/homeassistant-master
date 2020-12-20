@@ -19,7 +19,7 @@ automation:
         data:
           entity_id: input_select.closest_home_michael
           option: >-
-            {% if closest(person.michael, states.zone).entity_id == 'zone.cabin' %}
+            {% if closest('person.michael', states.zone).entity_id == 'zone.cabin' %}
             Pandemicabin
             {% else %}
             North Harbor Tower
