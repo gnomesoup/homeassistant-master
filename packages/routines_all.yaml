@@ -8,29 +8,18 @@ input_select:
 automation:
   - id: '1608339069146'
     alias: 'Set closest home'
-    variables:
-      current_zone: >-
-        {% if states('input_select.closest_home_michael') == 'Pandemicabin' -%}
-        zone.cabin
-        {%- else -%}
-        zone.home
-        {%- endif %}
-      closest_zone: >-
-        {{ closest(person.michael, states.zone).entity_id }}
     trigger:
       - platform: state
         entity_id: 
           - person.michael
-    condition:
-      - condition: template
-        value_template: >-
-          {{ closest_zone =! current_zone }}
+        for: 5
+    condition: []
     action:
       - service: input_select.set_options
         data:
           entity_id: input_select.closest_home_michael
           option: >-
-            {% if closest_zone == 'zone.cabin' %}
+            {% if closest(person.michael, states.zone).entity_id == 'zone.cabin' %}
             Pandemicabin
             {% else %}
             North Harbor Tower
