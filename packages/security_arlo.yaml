@@ -92,3 +92,25 @@ automation:
           {% else %}
           alarm_control_panel.alarm_arm_home
           {% endif %}
+  
+  - id: '1608648881217'
+    alias: Turn off arlo alarms after door opens
+    trigger:
+      - platform: state
+        entity_id: 
+          - binary_sensor.pancab_samjin_multi_fcd00d01_ias_zone
+          - binary_sensor.pancab_samjin_multi_0e220d01_ias_zone
+        from: 'off'
+        to: 'on'
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.aarlo_pandemicabin
+        state: armed_home
+    action:
+      - service: alarm_control_panel.alarm_disarm
+        data:
+          entity_id: alarm_control_panel.aarlo_pandemicabin
+      - delay: '00:15:00'
+      - service: alarm_control_panel.alarm_arm_home
+        data:
+          entity_id: alarm_control_panel.aarlo_pandemicabin
