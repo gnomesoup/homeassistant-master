@@ -46,6 +46,9 @@ automation:
           data:
             push:
               category: pandemicabin_away
+      - service: script.pandemicabin_actionable_away
+
+
 
   - id: '1606702211014'
     alias: 'Pandemicabin notify when away'
@@ -99,3 +102,38 @@ script:
           data:
             push:
               category: pandemicabin_away
+      - service: script.test_action_away
+  test_action_away:
+    alias: Test for action away
+    sequence:
+      - wait_for_trigger:
+        - platform: event
+          event_type: ios.notification_action_fired
+        timeout: '00:02:00'
+        continue_on_timeout: false
+      - service: notify.michael
+        data:
+          title: "Master HA Test"
+          message: >-
+            {{ wait.trigger.event.data.actionName }}
+  pandemicabin_actionable_away:
+    alias: "React to all away ios notification"
+    sequence:
+      - wait_for_trigger:
+        - platform: event
+          event_type: ios.notification_action_fired
+          event_data:
+            actionName: "AWAY_LONG_TERM"
+        - platform: event
+          event_type: ios.notification_action_fired
+          event_data:
+            actionName: "AWAY_SHORT_TERM"
+        timeout: '00:02:00'
+        continue_on_timeout: false
+      - service: >-
+          {% set actionName = wait.trigger.event.data.actionName %}
+          {% if actionName == 'AWAY_LONG_TERM' %}
+          script.pancab_leaving_home_long
+          {% elif actionName == 'AWAY_SHORT_TERM' %}
+          script.pancab_leaving_home_short
+          {% endif %}
