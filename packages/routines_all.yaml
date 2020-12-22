@@ -24,15 +24,28 @@ automation:
             {%- else -%}
             North Harbor Tower
             {%- endif -%}
-  # - id: '1608344953300'
-  #   alias: 'Notify when away from Pandemicabin'
-  #   trigger:
-  #     - platform: state
-  #       entity_id: entity id
-  #       from:  from state
-  #       to:  to state
-  #   condition:
-  #   action:
+  - id: '1608344953300'
+    alias: 'Notify when away from Pandemicabin'
+    trigger:
+    - platform: template
+      value_template: >-
+        {%- set atCabin = false %}
+        {%- for person in states.person %}
+          {%- if person.state == 'Cabin' %}
+            {%- set atCabin = true %}
+          {%- endif %}
+        {%- endfor %}
+        {{ atCabin }}
+      for: "00:15:00"
+    condition: []
+    action:
+      - service: notify.mobile_app_ergisch
+        data:
+          title: 'Pandemicabin Alert'
+          message: 'Everyone has left'
+          data:
+            push:
+              category: pandemicabin_away
 
   - id: '1606702211014'
     alias: 'Pandemicabin notify when away'
@@ -74,3 +87,15 @@ automation:
         data:
           title: "Panemicabin Alert"
           message: "It appears you are heading to the cabin. You might want to make it warmer."
+          
+script:
+  test_climate_notification:
+    alias: "Test of ios climate notifications"
+    sequence:
+      - service: notify.mobile_app_ergisch
+        data:
+          title: 'Pandemicabin Alert'
+          message: 'Everyone has left'
+          data:
+            push:
+              category: pandemicabin_away
