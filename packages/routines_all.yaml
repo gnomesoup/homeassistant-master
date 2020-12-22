@@ -138,10 +138,12 @@ script:
             actionName: "AWAY_SHORT_TERM"
         timeout: '00:02:00'
         continue_on_timeout: false
-      - service: >-
-          {% set actionName = wait.trigger.event.data.actionName %}
-          {% if actionName == 'AWAY_LONG_TERM' %}
-          script.pancab_leaving_home_long
-          {% elif actionName == 'AWAY_SHORT_TERM' %}
-          script.pancab_leaving_home_short
-          {% endif %}
+      - service: homeassistant.turn_on
+        data:
+          entity_id: >-
+            {% set actionName = wait.trigger.event.data.actionName %}
+            {% if actionName == 'AWAY_LONG_TERM' %}
+            script.pancab_leaving_home_long
+            {% elif actionName == 'AWAY_SHORT_TERM' %}
+            script.pancab_leaving_home_short
+            {% endif %}
