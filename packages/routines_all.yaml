@@ -12,7 +12,7 @@ automation:
       - platform: state
         entity_id: 
           - person.michael
-        for: 5
+        for: '00:05:00'
     condition: []
     action:
       - service: input_select.select_option
@@ -24,8 +24,9 @@ automation:
             {%- else -%}
             North Harbor Tower
             {%- endif -%}
+            
   - id: '1608344953300'
-    alias: 'Notify when away from Pandemicabin'
+    alias: 'Pandemicabin notify when all leave cabin'
     trigger:
     - platform: template
       value_template: >-
@@ -37,26 +38,32 @@ automation:
         {%- endfor %}
         {{ atCabin }}
       for: "00:15:00"
-    condition: []
+    condition:
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: alarm_control_panel.pancab_alarm
+            state: disarmed
+          - condition: state
+            entity_id: input_boolean.pancab_thermostat_hold_temp
+            state: 'off'
     action:
       - service: notify.mobile_app_ergisch
         data:
           title: 'Pandemicabin Alert'
-          message: 'Everyone has left'
+          message: 'Everyone has left the cabin'
           data:
             push:
               category: pandemicabin_away
       - service: script.pandemicabin_actionable_away
 
-
-
   - id: '1606702211014'
-    alias: 'Pandemicabin notify when away'
+    alias: 'Pandemicabin notify when far away'
     trigger:
       - platform: template
         value_template: >-
-          {{ distance('zone.cabin', 'device_tracker.ergisch') >= 60 and
-             distance('zone.cabin', 'device_tracker.iphone') >= 60 }}
+          {{ distance('zone.cabin', 'person.michael') >= 60 and
+             distance('zone.cabin', 'person.angela') >= 60 }}
         for: "00:45:00"
     condition:
       - condition: state
@@ -68,6 +75,7 @@ automation:
         data:
           title: "Panemicabin Alert"
           message: "It appears you have left. Set the heat to away"
+
   - id: '1606704077554'
     alias: 'Pandemicabin notify when getting close'
     trigger:
