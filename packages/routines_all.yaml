@@ -79,6 +79,21 @@ automation:
         data:
           title: "Panemicabin Alert"
           message: "It appears you are heading to the cabin. You might want to make it warmer."
+
+  - id: '1610678486936'
+    alias: Heat boost on tag scan
+    trigger:
+      - platform: tag
+        tag_id: 545ed46c-50f4-4e91-b847-76f13ea0a487
+    condition:
+      - condition: state
+        entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+        state: idle
+      - condition: template
+        value_template: >-
+          {{ as_timestamp(now()) - (as_timestamp(state_attr('script.heat_boost_temporary', 'last_triggered')) or 0 ) > 480}}
+    action:
+      - service: script.heat_boost_temporary
           
 script:
   test_climate_notification:
@@ -129,7 +144,6 @@ script:
             script.pancab_leaving_home_short
             {% endif %}
 
-script:
   heat_boost_temporary:
     alias: "Temporary Heat Boost"
     mode: single
