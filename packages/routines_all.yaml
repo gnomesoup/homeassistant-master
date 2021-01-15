@@ -57,25 +57,6 @@ automation:
               category: pandemicabin_away
       - service: script.pandemicabin_actionable_away
 
-  - id: '1606702211014'
-    alias: 'Pandemicabin notify when far away'
-    trigger:
-      - platform: template
-        value_template: >-
-          {{ distance('zone.cabin', 'person.michael') >= 60 and
-             distance('zone.cabin', 'person.angela') >= 60 }}
-        for: "00:45:00"
-    condition:
-      - condition: state
-        entity_id:
-          - input_boolean.pancab_heat_away
-        state: 'off'
-    action:
-      - service: notify.grown_ups
-        data:
-          title: "Panemicabin Alert"
-          message: "It appears you have left. Set the heat to away"
-
   - id: '1606704077554'
     alias: 'Pandemicabin notify when getting close'
     trigger:
@@ -147,3 +128,29 @@ script:
             {% elif actionName == 'AWAY_SHORT_TERM' %}
             script.pancab_leaving_home_short
             {% endif %}
+
+script:
+  heat_boost_temporary:
+    alias: "Temporary Heat Boost"
+    sequence:
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+          temperature: >-
+            {{ state_attr('climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode', 'temperature') + 2 }}
+      - wait_for_trigger:
+        - platform: state
+          entity_id:
+            - climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+          from: 'heat'
+          to: 'idle'
+        timeout: '00:07:00'
+        continue_on_timeout: true
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+          temperature: >-
+            {{ states('input_number.pancab_heat_auto_setpoint') }}
+
+
+
