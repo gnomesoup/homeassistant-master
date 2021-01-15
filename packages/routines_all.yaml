@@ -132,12 +132,13 @@ script:
 script:
   heat_boost_temporary:
     alias: "Temporary Heat Boost"
+    mode: single
     sequence:
       - service: climate.set_temperature
         data:
           entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
           temperature: >-
-            {{ state_attr('climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode', 'temperature') + 2 }}
+            {{ state_attr('climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode', 'current_temperature') + 2 }}
       - wait_for_trigger:
         - platform: state
           entity_id:
