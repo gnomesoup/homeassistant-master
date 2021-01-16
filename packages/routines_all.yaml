@@ -84,7 +84,7 @@ automation:
     alias: Heat boost on tag scan
     trigger:
       - platform: tag
-        tag_id: 545ed46c-50f4-4e91-b847-76f13ea0a487
+        tag_id: b419ea4c-5501-4517-9cef-b240f806210a
     condition:
       - condition: state
         entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
