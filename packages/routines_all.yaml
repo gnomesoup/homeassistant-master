@@ -88,6 +88,10 @@ automation:
     condition:
       - condition: state
         entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+        state: heat
+      - condition: state
+        entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+        attribute: hvac_action
         state: idle
       - condition: template
         value_template: >-
