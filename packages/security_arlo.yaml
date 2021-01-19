@@ -54,8 +54,8 @@ automation:
     condition:
       - condition: template
         value_template: >-
-          {{ states("alarm_control_panel.home_alarm") != "pending" or
-             states("alarm_control_panel.home_alarm") != "triggered"}}
+          {{ states("alarm_control_panel.nht_home_alarm") != "pending" or
+             states("alarm_control_panel.nht_home_alarm") != "triggered"}}
     action:
       - entity_id: alarm_control_panel.aarlo_nht
         service: >-
@@ -80,8 +80,8 @@ automation:
     condition:
       - condition: template
         value_template: >-
-          {{ states("alarm_control_panel.home_alarm") != "pending" or
-             states("alarm_control_panel.home_alarm") != "triggered"}}
+          {{ states("alarm_control_panel.pancab_alarm") != "pending" or
+             states("alarm_control_panel.pancab_alarm") != "triggered"}}
     action:
       - entity_id: alarm_control_panel.aarlo_pandemicabin
         service: >-
