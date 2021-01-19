@@ -30,13 +30,13 @@ automation:
     trigger:
     - platform: template
       value_template: >-
-        {%- set atCabin = false %}
-        {%- for person in states.person %}
-          {%- if person.state == 'Cabin' %}
-            {%- set atCabin = true %}
-          {%- endif %}
+        {% set ns = namespace(atCabin=false) %}
+        {% for person in states.person -%}
+        {% if person.state == 'Cabin' -%}
+        {% set ns.atCabin = true %}
+        {%- endif %}
         {%- endfor %}
-        {{ atCabin }}
+        {{ not ns.atCabin }}
       for: "00:15:00"
     condition:
       - condition: or
