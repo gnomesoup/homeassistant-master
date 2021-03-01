@@ -131,4 +131,4 @@ automation:
     action:
       - service: homeassistant.turn_on
         data:
-          entity_id: light.aarlo_floodlight
+          entity_id: light.aarlo_garage_floodlight

@@ -87,10 +87,10 @@ automation:
         tag_id: b419ea4c-5501-4517-9cef-b240f806210a
     condition:
       - condition: state
-        entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+        entity_id: climate.pancab_z_wave_plus_thermostat
         state: heat
       - condition: state
-        entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+        entity_id: climate.pancab_z_wave_plus_thermostat
         attribute: hvac_action
         state: idle
       - condition: template
@@ -154,20 +154,20 @@ script:
     sequence:
       - service: climate.set_temperature
         data:
-          entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+          entity_id: climate.pancab_z_wave_plus_thermostat
           temperature: >-
-            {{ state_attr('climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode', 'current_temperature') + 2 }}
+            {{ state_attr('climate.pancab_z_wave_plus_thermostat', 'current_temperature') + 2 }}
       - wait_for_trigger:
         - platform: state
           entity_id:
-            - climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+            - climate.pancab_z_wave_plus_thermostat
           from: 'heat'
           to: 'idle'
         timeout: '00:07:00'
         continue_on_timeout: true
       - service: climate.set_temperature
         data:
-          entity_id: climate.pancab_gc_tbz48_battery_powered_z_wave_thermostat_mode
+          entity_id: climate.pancab_z_wave_plus_thermostat
           temperature: >-
             {{ states('input_number.pancab_heat_auto_setpoint') }}
 
