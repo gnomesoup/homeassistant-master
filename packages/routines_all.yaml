@@ -28,24 +28,32 @@ automation:
   - id: '1608344953300'
     alias: 'Pandemicabin notify when all leave cabin'
     trigger:
-    - platform: template
-      value_template: >-
-        {% set ns = namespace(atCabin=false) %}
-        {% for person in states.person -%}
-        {% if person.state == 'Cabin' -%}
-        {% set ns.atCabin = true %}
-        {%- endif %}
-        {%- endfor %}
-        {{ not ns.atCabin }}
+    - platform: state
+      entity_id:
+        - person.angela
+        - person.michael
+        - person.camille
       for: "00:15:00"
     condition:
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: person.angela
+            state: cabin
+          - condition: state
+            entity_id: person.michael
+            state: cabin
+          - condition: state
+            entity_id: person.camille
+            state: cabin
       - condition: or
         conditions:
           - condition: state
             entity_id: alarm_control_panel.pancab_alarm
             state: disarmed
           - condition: state
-            entity_id: input_boolean.pancab_thermostat_hold_temp
+            entity_id: 
+              - input_boolean.pancab_guest_mode
             state: 'off'
     action:
       - service: notify.mobile_app_ergisch
@@ -62,8 +70,8 @@ automation:
     trigger:
       - platform: template
         value_template: >-
-          {{ distance('zone.cabin', 'device_tracker.ergisch') <= 80 or
-             distance('zone.cabin', 'device_tracker.iphone') <= 80 }}
+          {{ distance('zone.cabin', 'person.michael')|int <= 80 or
+             distance('zone.cabin', 'person.angela')|int <= 80 }}
         for: "00:15:00"
     condition:
       - condition: state
@@ -74,6 +82,10 @@ automation:
         entity_id: 
           - sensor.pancab_temperature_overall
         below: 67
+      - condition: state
+        entity_id:
+          - input_boolean.pancab_guest_mode
+        state: 'off'
     action:
       - service: notify.grown_ups
         data:
@@ -170,10 +182,3 @@ script:
           entity_id: climate.pancab_z_wave_plus_thermostat
           temperature: >-
             {{ states('input_number.pancab_heat_auto_setpoint') }}
-
-  return_to_cabin:
-    alias: "Return To Cabin"
-    mode: single
-    sequence:
-      - service: homeassistant.turn_off
-        entity_id: input_boolean.pancab_heat_away
