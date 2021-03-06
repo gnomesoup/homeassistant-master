@@ -171,5 +171,9 @@ script:
           temperature: >-
             {{ states('input_number.pancab_heat_auto_setpoint') }}
 
-
-
+  return_to_cabin:
+    alias: "Return To Cabin"
+    mode: single
+    sequence:
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.pancab_heat_away

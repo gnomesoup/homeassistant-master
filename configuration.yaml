@@ -55,4 +55,3 @@ media_player:
 sensor:
 switch:
 weather:
-zwave:
