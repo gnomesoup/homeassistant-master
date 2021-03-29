@@ -37,15 +37,17 @@ automation:
     condition:
       - condition: not
         conditions:
-          - condition: state
-            entity_id: person.angela
-            state: cabin
-          - condition: state
-            entity_id: person.michael
-            state: cabin
-          - condition: state
-            entity_id: person.camille
-            state: cabin
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: person.angela
+                state: cabin
+              - condition: state
+                entity_id: person.michael
+                state: cabin
+              - condition: state
+                entity_id: person.camille
+                state: cabin
       - condition: or
         conditions:
           - condition: state
