@@ -22,7 +22,9 @@ input_select:
     name: Playmode
     icon: mdi:playlist-music
     options: ## Should be empty
-    - "Shuffle" - "Random" - "Shuffle Random"
+    - "Shuffle" 
+    - "Random" 
+    - "Shuffle Random"
     - "Direct"
 
 input_boolean:
