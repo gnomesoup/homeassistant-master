@@ -28,7 +28,7 @@ automation:
           sequence:
             - service: tts.cloud_say
               data:
-                entity_id: media_player.nht_office_speaker
+                entity_id: media_player.nht_camille_s_speaker
                 message: >
                   Camille, get ready for the {{ state_attr('calendar.camille', 'message') }}
             - service: notify.camille
