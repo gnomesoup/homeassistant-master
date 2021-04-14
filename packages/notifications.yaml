@@ -21,11 +21,10 @@ notify:
     resource: http://192.168.40.159:8123/api/services/tts/google_translate_say
     method: POST_JSON
     headers:
-      Authorization: !secret nht_token
+      Authorization: !secret nht_bearer
     message_param_name: message
     data:
-      target:
-        entity_id: media_player.office_speaker
+      entity_id: media_player.notify_camille
 
 automation:
   - id: '1607566508232'
