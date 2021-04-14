@@ -18,13 +18,11 @@ notify:
       - service: mobile_app_iphone
   - name: nht_camille_tty
     platform: rest
-    resource: http://192.168.40.159:8123/api/services/tts/google_translate_say
+    resource: http://192.168.40.159:8123/api/services/script/notify_camille_with_sound
     method: POST_JSON
     headers:
       Authorization: !secret nht_bearer
     message_param_name: message
-    data:
-      entity_id: media_player.notify_camille
 
 automation:
   - id: '1607566508232'
