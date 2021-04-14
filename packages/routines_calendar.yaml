@@ -26,11 +26,10 @@ automation:
               entity_id: person.camille
               state: "home"
           sequence:
-            - service: tts.cloud_say
+            - service: notify.nht_camille_tty
               data:
-                entity_id: media_player.nht_camille_s_speaker
                 message: >
-                  Camille, get ready for the {{ state_attr('calendar.camille', 'message') }}
+                  Camille, get ready for {{ state_attr('calendar.camille', 'message') }}
         - conditions:
             - alias: "Camille at cabin"
               condition: state
