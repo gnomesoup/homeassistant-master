@@ -18,7 +18,7 @@ notify:
       - service: mobile_app_iphone
   - name: nht_camille_tty
     platform: rest
-    resource: http://192.168.40.159:8123/api/services/tty/google_translate_say
+    resource: http://192.168.40.159:8123/api/services/tts/google_translate_say
     method: POST_JSON
     headers:
       Authorization: !secret nht_token
