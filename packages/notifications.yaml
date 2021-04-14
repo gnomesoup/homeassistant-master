@@ -16,6 +16,16 @@ notify:
     services:
       - service: mobile_app_ergisch
       - service: mobile_app_iphone
+  - name: camille_tty
+    platform: rest
+    resource: http://192.168.40.159:8123/api/services/tty/google_translate_say
+    method: POST_JSON
+    headers:
+      Authorization: !secret nht_token
+    message_param_name: message
+    data:
+      target:
+        entity_id: media_player.office_speaker
 
 automation:
   - id: '1607566508232'
