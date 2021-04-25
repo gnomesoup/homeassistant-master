@@ -23,6 +23,13 @@ notify:
     headers:
       Authorization: !secret nht_bearer
     message_param_name: message
+  - name: pancab_camille_tty
+    platform: rest
+    resource: http://192.168.100.101:8123/api/services/script/notify_camille_with_sound
+    method: POST_JSON
+    headers:
+      Authorization: !secret pancab_bearer
+    message_param_name: message
 
 automation:
   - id: '1607566508232'
