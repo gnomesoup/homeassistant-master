@@ -36,7 +36,7 @@ automation:
               entity_id: person.camille
               state: "Cabin"
           sequence:
-            - service: notify.nht_camille_tty
+            - service: notify.pancab_camille_tty
               data:
                 message: >
                   Camille, get ready for {{ state_attr('calendar.camille', 'message') }}
