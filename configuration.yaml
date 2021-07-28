@@ -4,6 +4,9 @@ default_config:
 
 http:
   server_port: 8122
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - !secret tinc_ip
 
 remote_homeassistant:
   instances:
