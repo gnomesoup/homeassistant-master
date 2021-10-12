@@ -133,3 +133,15 @@ automation:
         data:
           entity_id: 
             - light.aarlo_garage_floodlight
+  - id: '3b226a6c-bcfd-4d0e-a5f6-0ee9cac9eac9'
+    alias: Pandemicabin turn floodlight on with motion
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.aarlo_motion_garage_floodlight
+        from: "off"
+        to: "on"
+    action:
+      - service: homeassistant.turn_on
+        data:
+          entity_id: 
+            - light.aarlo_garage_floodlight
