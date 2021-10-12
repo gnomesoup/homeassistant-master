@@ -141,6 +141,10 @@ automation:
         entity_id: binary_sensor.aarlo_motion_garage_floodlight
         from: "off"
         to: "on"
+    condition:
+      - condition: state
+        entity_id: sun.pancab_sun
+        state: below_horizon
     action:
       - service: homeassistant.turn_on
         data:
