@@ -133,6 +133,7 @@ automation:
         data:
           entity_id: 
             - light.aarlo_garage_floodlight
+
   - id: '3b226a6c-bcfd-4d0e-a5f6-0ee9cac9eac9'
     alias: Pandemicabin turn floodlight on with motion
     trigger:
