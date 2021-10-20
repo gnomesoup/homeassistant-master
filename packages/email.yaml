@@ -9,25 +9,22 @@ sensor:
     senders:
       - hello@yourporter.com
       - pfammatter@gmail.com
-  - platform: template
-    sensors: 
-      yourporter_listing:
-        friendly_name: Your Porter Listing
-        value_template: >-
-          {{ state_attr("sensor.yourporter", "body") |
-             regex_findall_index("\$listing: (.*)\n")}}
-      yourporter_in_date:
-        friendly_name: Your Porter Checkin
-        value_template: >-
-          {{ state_attr("sensor.yourporter", "body") |
-             regex_findall_index("\$inDate: (.*)\n")}}
-      yourporter_out_date:
-        friendly_name: Your Porter Checkin
-        value_template: >-
-          {{ state_attr("sensor.yourporter", "body") |
-             regex_findall_index("\$outDate: (.*)\n")}}
-      yourporter_guest_code:
-        friendly_name: Your Porter Guest Code
-        value_template: >-
-          {{ state_attr("sensor.yourporter", "body") |
-             regex_findall_index("\$guestCode: (\d{4})")}}
+
+template:
+  - sensor: 
+    - name: "Your Porter Listing"
+      state: >-
+        {{ state_attr("sensor.yourporter", "body") |
+            regex_findall_index("\$listing: (.*)\n")}}
+    - name: "Your Porter Checkin"
+      state: >-
+        {{ state_attr("sensor.yourporter", "body") |
+            regex_findall_index("\$inDate: (.*)\n")}}
+    - name: "Your Porter Checkout"
+      state: >-
+        {{ state_attr("sensor.yourporter", "body") |
+            regex_findall_index("\$outDate: (.*)\n")}}
+    - name: "Your Porter Guest Code"
+      state: >-
+        {{ state_attr("sensor.yourporter", "body") |
+            regex_findall_index("\$guestCode: (\d{4})")}}
