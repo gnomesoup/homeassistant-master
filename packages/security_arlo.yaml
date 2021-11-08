@@ -106,6 +106,14 @@ automation:
       - condition: state
         entity_id: alarm_control_panel.aarlo_pandemicabin
         state: armed_home
+      - condition: state
+        entity_id:
+          - input_boolean.pancab_guest_mode
+        state: 'off'
+      - condition: state
+        entity_id:
+          - input_select.closest_home_michael
+        state: 'Pandemicabin'
     action:
       - service: alarm_control_panel.alarm_disarm
         data:
