@@ -4,10 +4,20 @@ input_select:
     options:
       - 'North Harbor Tower'
       - 'Pandemicabin'
+  closest_home_angela:
+    name: 'Closest Home Angela'
+    options:
+      - 'North Harbor Tower'
+      - 'Pandemicabin'
+  closest_home_camille:
+    name: 'Closest Home Camille'
+    options:
+      - 'North Harbor Tower'
+      - 'Pandemicabin'
 
 automation:
   - id: '1608339069146'
-    alias: 'Set closest home'
+    alias: 'Set closest home michael'
     trigger:
       - platform: state
         entity_id: 
@@ -20,6 +30,44 @@ automation:
           entity_id: input_select.closest_home_michael
           option: >-
             {%- if closest('person.michael', states.zone).entity_id == 'zone.cabin' %}
+            Pandemicabin
+            {%- else -%}
+            North Harbor Tower
+            {%- endif -%}
+
+  - id: a0a3998d-5577-4d88-b931-ae20ea18573e
+    alias: 'Set closest home angela'
+    trigger:
+      - platform: state
+        entity_id: 
+          - person.angela
+        for: '00:05:00'
+    condition: []
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.closest_home_angela
+          option: >-
+            {%- if closest('person.angela', states.zone).entity_id == 'zone.cabin' %}
+            Pandemicabin
+            {%- else -%}
+            North Harbor Tower
+            {%- endif -%}
+            
+  - id: 98369a67-4c00-4402-a8d4-abc62043f30b 
+    alias: 'Set closest home camille'
+    trigger:
+      - platform: state
+        entity_id: 
+          - person.camille
+        for: '00:05:00'
+    condition: []
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.closest_home_camille
+          option: >-
+            {%- if closest('person.camille', states.zone).entity_id == 'zone.cabin' %}
             Pandemicabin
             {%- else -%}
             North Harbor Tower
