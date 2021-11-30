@@ -1,0 +1,46 @@
+automation:
+  - id: cbb855f7-0604-40fe-8446-5e8feff4ac3e
+    alias: Notify if humidifiers are empty
+    trigger:
+      - platform: numeric_state
+        entity_id:
+          - sensor.nht_smart_energy_switch_power
+          - sensor.nht_smart_energy_switch_power_2
+        below: 50
+        for: "00:10:00"
+      - platform: state
+        entity_id: person.michael
+        to: "home"
+        for: "00:10:00"
+    condition:
+      - alias: "Humidity is low"
+        condition: numeric_state
+        entity_id: sensor.nht_humidity_whole_house
+        below: 48
+      - alias: "Michael is home"
+        condition: state
+        entity_id: person.michael
+        state: "home"
+      - condition: or
+        conditions:
+        - alias: "Living room humidifiers not running"
+          condition: numeric_state
+          entity_id: sensor.nht_smart_energy_switch_power
+          below: 50
+        - alias: "Living room humidifiers not running"
+          condition: numeric_state
+          entity_id: sensor.nht_smart_energy_switch_power_2
+          below: 50
+    action:
+      - alias: "Notify michael"
+        service: notify.michael
+        data:
+          title: NHT Alert
+          message: >-
+            Check the 
+            {%- if trigger.entity_id == "sensor.nht_smart_energy_switch_power" -%}
+            {{" "}}living room{{" "}}
+            {%- else -%}
+            {{" "}}bedroom{{" "}}
+            {%- endif -%}
+            humidifier
