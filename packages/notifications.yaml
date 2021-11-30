@@ -31,6 +31,15 @@ notify:
       Authorization: !secret pancab_bearer
     message_param_name: message
 
+template:
+  - platform: template
+    sensors:
+      home_notifications_wanted_michael:
+        friendly_name: "Home Notifications Wanted Michael"
+        value_template: >-
+          {{ states("person.michael") == "home" and
+          states("binary_sensor.nht_sleepnumber_michael_michael_is_in_bed") == "off"}}
+
 automation:
   - id: '1607566508232'
     alias: Notify when remote connection is down
