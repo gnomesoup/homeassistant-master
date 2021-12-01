@@ -9,18 +9,18 @@ automation:
         below: 50
         for: "00:10:00"
       - platform: state
-        entity_id: person.michael
-        to: "home"
+        entity_id: binary_sensor.home_notifications_wanted_michael
+        to: "on"
         for: "00:10:00"
     condition:
       - alias: "Humidity is low"
         condition: numeric_state
         entity_id: sensor.nht_humidity_whole_house
         below: 48
-      - alias: "Michael is home"
+      - alias: "Home notifications are wanted"
         condition: state
-        entity_id: person.michael
-        state: "home"
+        entity_id: binary_sensor.home_notifications_wanted_michael
+        state: "on"
       - condition: or
         conditions:
         - alias: "Living room humidifiers not running"

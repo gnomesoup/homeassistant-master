@@ -35,8 +35,8 @@ template:
   - binary_sensor:
       - name: "Home Notifications Wanted Michael"
         state: >-
-          {{ states("person.michael") == "home" and
-          states("binary_sensor.nht_sleepnumber_michael_michael_is_in_bed") == "off"}}
+          {{ is_state("person.michael", "home") and
+          is_state("binary_sensor.nht_sleepnumber_michael_michael_is_in_bed", "off")}}
 
 automation:
   - id: '1607566508232'
