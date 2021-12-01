@@ -32,11 +32,9 @@ notify:
     message_param_name: message
 
 template:
-  - platform: template
-    sensors:
-      home_notifications_wanted_michael:
-        friendly_name: "Home Notifications Wanted Michael"
-        value_template: >-
+  - binary_sensor:
+      - name: "Home Notifications Wanted Michael"
+        state: >-
           {{ states("person.michael") == "home" and
           states("binary_sensor.nht_sleepnumber_michael_michael_is_in_bed") == "off"}}
 
