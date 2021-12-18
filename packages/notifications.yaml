@@ -2,7 +2,7 @@ notify:
   - name: michael
     platform: group
     services:
-      - service: mobile_app_ergisch
+      - service: mobile_app_kashyyyk
   - name: angela
     platform: group
     services:
@@ -14,7 +14,7 @@ notify:
   - name: grown_ups
     platform: group
     services:
-      - service: mobile_app_ergisch
+      - service: mobile_app_kashyyyk
       - service: mobile_app_iphone
   - name: nht_camille_tty
     platform: rest

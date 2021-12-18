@@ -106,7 +106,7 @@ automation:
               - input_boolean.pancab_guest_mode
             state: 'off'
     action:
-      - service: notify.mobile_app_ergisch
+      - service: notify.mobile_app_kashyyyk
         data:
           title: 'Pandemicabin Alert'
           message: 'Everyone has left the cabin'
@@ -165,7 +165,7 @@ script:
   test_climate_notification:
     alias: "Test of ios climate notifications"
     sequence:
-      - service: notify.mobile_app_ergisch
+      - service: notify.mobile_app_kashyyyk
         data:
           title: 'Pandemicabin Alert'
           message: 'Everyone has left'
