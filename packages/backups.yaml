@@ -1,0 +1,110 @@
+input_select:
+  backup_endor_docker:
+    name: "Backup Endor: Docker"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_endor_homeassistant_master:
+    name: "Backup Endor: Home Assistant Master"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_endor_homeassistant_nht:
+    name: "Backup Endor: Home Assistant NHT"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_endor_zwavejs:
+    name: "Backup Endor: ZwaveJS"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_endor_mosquitto:
+    name: "Backup Endor: Mosquitto"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_endor_photoprism:
+    name: "Backup Endor: Photoprism"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_pandemicabin_docker:
+    name: "Backup Pandemicabin: Docker"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_pandemicabin_homeassistant:
+    name: "Backup Pandemicabin: Home Assistant"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_pandemicabin_zwavejs:
+    name: "Backup Pandemicabin: ZwaveJS"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_coruscant_users:
+    name: "Backup Coruscant: Users"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_coruscant_space:
+    name: "Backup Coruscant: Space"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+
+automation:
+  - id: 28d64aad-58d2-4332-91f1-ce31457894fb
+    alias: Reset Backups
+    trigger:
+      - platform: time
+        at: "00:00:00"
+    condition: []
+    action:
+      service: input_boolean.turn_off
+      entity_id:
+        - input_boolean.backup_endor
+        - input_boolean.backup_pandemicabin
+        - input_boolean.backup_coruscant
+  - id: 2633f17a-4fca-4d43-a681-8059b0726565
+    alias: Check backups
+    trigger:
+      - platform: time
+        at: "10:00:00"
+    condition:
+    action:
