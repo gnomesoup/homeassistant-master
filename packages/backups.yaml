@@ -88,6 +88,21 @@ input_select:
       - Successful
       - Error
 
+group:
+  all_backups:
+    entities:
+      - input_select.backup_endor_docker
+      - input_select.backup_endor_homeassistant_master
+      - input_select.backup_endor_homeassistant_nht
+      - input_select.backup_endor_zwavejs
+      - input_select.backup_endor_mosquitto
+      - input_select.backup_endor_photoprism
+      - input_select.backup_pandemicabin_docker
+      - input_select.backup_pandemicabin_homeassistant
+      - input_select.backup_pandemicabin_zwavejs
+      - input_select.backup_coruscant_users
+      - input_select.backup_coruscant_space
+
 automation:
   - id: 28d64aad-58d2-4332-91f1-ce31457894fb
     alias: Reset Backups
@@ -96,15 +111,15 @@ automation:
         at: "00:00:00"
     condition: []
     action:
-      service: input_boolean.turn_off
+      service: input_select.select_option
       entity_id:
-        - input_boolean.backup_endor
-        - input_boolean.backup_pandemicabin
-        - input_boolean.backup_coruscant
-  - id: 2633f17a-4fca-4d43-a681-8059b0726565
-    alias: Check backups
-    trigger:
-      - platform: time
-        at: "10:00:00"
-    condition:
-    action:
+        - group.all_backups
+      data:
+        option: Not run
+  # - id: 2633f17a-4fca-4d43-a681-8059b0726565
+  #   alias: Check backups
+  #   trigger:
+  #     - platform: time
+  #       at: "10:00:00"
+  #   condition:
+  #   action:
