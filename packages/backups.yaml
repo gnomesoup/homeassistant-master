@@ -87,6 +87,14 @@ input_select:
       - Running
       - Successful
       - Error
+  backup_linode_proxy_docker:
+    name: "Backup Linode Proxy: Docker"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
 
 group:
   all_backups:
