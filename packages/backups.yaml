@@ -135,3 +135,18 @@ automation:
           title: "Homeassistant Alert"
           message: "Backups have errors"
 
+  - id: 4c7a6934-ebb0-42a4-bcca-4bbc8d07fb8c
+    alias: Check for long running backups
+    trigger:
+      - platform: template
+        value_template: >-
+          {{ (now() - (expand('group.all_backups')
+            | selectattr('state', "==", "Running")
+            | map(attribute='last_changed') | sort(reverse=false)
+            | list | first)) > timedelta(hours=16) }}
+    action:
+      - service: notify.michael
+        data:
+          title: "Homeassistant Alert"
+          message: "Backups are taking a while"
+
