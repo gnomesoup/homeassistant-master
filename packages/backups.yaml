@@ -111,11 +111,19 @@ automation:
         at: "00:00:00"
     condition: []
     action:
-      service: input_select.select_option
-      entity_id:
-        - group.all_backups
-      data:
-        option: Not run
+      - variables:
+          notRunning: >-
+            {%- for entity in expand(['group.all_backups']) %}
+              {%- if states(entity.entity_id) != "Running" %}
+                {{entity.entity_id}}
+              {%- endif %}
+            {%- endfor %}
+
+      - service: input_select.select_option
+        entity_id: "{{notRunning}}"
+        data:
+          option: Not run
+
   # - id: 2633f17a-4fca-4d43-a681-8059b0726565
   #   alias: Check backups
   #   trigger:
