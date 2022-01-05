@@ -112,15 +112,14 @@ automation:
     condition: []
     action:
       - variables:
-          notRunning: >-
-            {%- for entity in expand(['group.all_backups']) %}
-              {%- if states(entity.entity_id) != "Running" %}
-                {{entity.entity_id}}
-              {%- endif %}
-            {%- endfor %}
-
+          notRunning: 
       - service: input_select.select_option
-        entity_id: "{{notRunning}}"
+        entity_id: >-
+          {%- for entity in expand(['group.all_backups']) %}
+            {%- if states(entity.entity_id) != "Running" %}
+            - {{entity.entity_id}}
+            {%- endif %}
+          {%- endfor %}
         data:
           option: Not run
 
