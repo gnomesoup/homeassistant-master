@@ -110,6 +110,7 @@ group:
       - input_select.backup_pandemicabin_zwavejs
       - input_select.backup_coruscant_users
       - input_select.backup_coruscant_space
+      - input_select.backup_linode_proxy_docker
 
 automation:
   - id: 28d64aad-58d2-4332-91f1-ce31457894fb
