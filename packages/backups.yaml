@@ -116,7 +116,7 @@ automation:
           entity_id: >-
             {%- for entity in expand(['group.all_backups']) %}
               {%- if states(entity.entity_id) != "Running" %}
-              - {{entity.entity_id}}
+                {{entity.entity_id}}
               {%- endif %}
             {%- endfor %}
         data:
