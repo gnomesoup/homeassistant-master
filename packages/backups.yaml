@@ -114,12 +114,13 @@ automation:
       - variables:
           notRunning: 
       - service: input_select.select_option
-        entity_id: >-
-          {%- for entity in expand(['group.all_backups']) %}
-            {%- if states(entity.entity_id) != "Running" %}
-            - {{entity.entity_id}}
-            {%- endif %}
-          {%- endfor %}
+        entity_id:
+          - input_select.backup_coruscant_space
+          #   {%- for entity in expand(['group.all_backups']) %}
+          #   {%- if states(entity.entity_id) != "Running" %}
+          #   - {{entity.entity_id}}
+          #   {%- endif %}
+          # {%- endfor %}
         data:
           option: Not run
 
