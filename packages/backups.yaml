@@ -120,10 +120,18 @@ automation:
         data:
           option: Not run
 
-  # - id: 2633f17a-4fca-4d43-a681-8059b0726565
-  #   alias: Check backups
-  #   trigger:
-  #     - platform: time
-  #       at: "10:00:00"
-  #   condition:
-  #   action:
+  - id: 2633f17a-4fca-4d43-a681-8059b0726565
+    alias: Check status of backups
+    trigger:
+      - platform: time
+        at: "18:00:00"
+    condition: >-
+      {{ expand('group.all_backups')
+        | selectattr('state', 'in', ['Error', 'Not run'])
+        | list | length > 1 }}
+    action:
+      - service: notify.michael
+        data:
+          title: "Homeassistant Alert"
+          message: "Backups have errors"
+
