@@ -95,6 +95,30 @@ input_select:
       - Running
       - Successful
       - Error
+  backup_eadu_docker:
+    name: "Backup Eadu: Docker"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_eadu_nextcloud:
+    name: "Backup Eadu: Nextcloud Volume"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
+  backup_eadu_db:
+    name: "Backup Eadu: Database Volume"
+    icon: mdi:history
+    options:
+      - Not run
+      - Running
+      - Successful
+      - Error
 
 group:
   all_backups:
@@ -111,6 +135,9 @@ group:
       - input_select.backup_coruscant_users
       - input_select.backup_coruscant_space
       - input_select.backup_linode_proxy_docker
+      - input_select.backup_eadu_docker
+      - input_select.backup_eadu_nextcloud
+      - input_select.backup_eadu_db
 
 automation:
   - id: 28d64aad-58d2-4332-91f1-ce31457894fb
