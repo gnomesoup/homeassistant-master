@@ -1,0 +1,19 @@
+automation:
+  - id: b8433072-f1dd-411d-a261-17ed8860792c
+    alias: NHT TV
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionID: D03A00DB-D822-4A8D-94E6-CA7A072DE4EF
+          actionName: NHT TV
+          sourceDeviceID: kashyyyk
+          sourceDeviceName: Kashyyyk
+          sourceDevicePermanentID: 36125E58-99DF-40EA-B840-76BD83C4133D
+          triggerSource: watch
+    condition: []
+    action:
+      - alias: "Run tv time"
+        service: script.turn_on
+        target:
+          entity_id: script.nht_tv_time
