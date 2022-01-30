@@ -10,7 +10,7 @@ http:
 
 remote_homeassistant:
   instances:
-    - host: 192.168.100.101
+    - host: 100.72.82.89
       access_token: !secret pandemicabin_token
       entity_prefix: "pancab_"
       exclude:
