@@ -24,7 +24,7 @@ automation:
       - platform: event
         event_type: ios.action_fired
         event_data:
-          actionID: AFFFBF35-4801-4773-A8AC-D058DEE940B
+          actionID: AFFFBF35-4801-4773-A8AC-D05B8DEE940B
           actionName: Disarm NHT
           sourceDeviceID: kashyyyk
           sourceDeviceName: Kashyyyk
@@ -40,8 +40,8 @@ automation:
               entity_id: alarm_control_panel.aarlo_nht
               state: "disarmed"
           sequence:
-            - alias: "Arm NHT for home"
-              service: alarm_control_panel.alarm_arm_home
+            - alias: "Arm NHT for night"
+              service: alarm_control_panel.alarm_arm_night
               target:
                 entity_id: alarm_control_panel.aarlo_nht
         default:
