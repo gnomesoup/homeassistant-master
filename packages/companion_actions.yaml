@@ -57,7 +57,7 @@ automation:
         event_type: ios.action_fired
         event_data:
           actionID: F09054B2-7CE8-43D4-9A45-44C0E7716322
-          actionName: Disarm NHT
+          actionName: NHT Music
           sourceDeviceID: kashyyyk
           sourceDeviceName: Kashyyyk
           sourceDevicePermanentID: 36125E58-99DF-40EA-B840-76BD83C4133D
