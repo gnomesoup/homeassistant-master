@@ -43,7 +43,7 @@ automation:
             - alias: "Arm NHT for night"
               service: alarm_control_panel.alarm_arm_night
               target:
-                entity_id: alarm_control_panel.aarlo_nht
+                entity_id: alarm_control_panel.nht_home_alarm
         default:
             - alias: "Disarm NHT"
               service: alarm_control_panel.alarm_disarm
