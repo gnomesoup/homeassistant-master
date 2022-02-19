@@ -37,7 +37,7 @@ automation:
         - conditions:
             - alias: "NHT is disarmed"
               condition: state
-              entity_id: alarm_control_panel.aarlo_nht
+              entity_id: alarm_control_panel.nht_home_alarm
               state: "disarmed"
           sequence:
             - alias: "Arm NHT for night"
@@ -48,4 +48,4 @@ automation:
             - alias: "Disarm NHT"
               service: alarm_control_panel.alarm_disarm
               target:
-                entity_id: alarm_control_panel.aarlo_nht
+                entity_id: alarm_control_panel.nht_home_alarm
