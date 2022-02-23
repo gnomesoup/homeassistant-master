@@ -85,4 +85,4 @@ automation:
       - alias: "Activate goodnight camille"
         service: script.turn_on
         target:
-          entity_id: script.nht_goodmorning_camille
+          entity_id: script.nht_goodnight_camille
