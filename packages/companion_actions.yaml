@@ -68,3 +68,21 @@ automation:
         service: script.turn_on
         target:
           entity_id: script.nht_radio_time
+
+  - id: 4eea3abe-e687-4b91-8e55-7288040e063e
+    alias: Goodnight Camille ios Action
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionID: DEB8B98F-B140-47C7-90C0-258EA55C7B49,
+          actionName: Goodnight Camille,
+          sourceDeviceID: kashyyyk,
+          sourceDeviceName: Kashyyyk,
+          sourceDevicePermanentID: 36125E58-99DF-40EA-B840-76BD83C4133D,
+    condition: []
+    action:
+      - alias: "Activate goodnight camille"
+        service: script.turn_on
+        target:
+          entity_id: script.nht_goodmorning_camille
