@@ -75,11 +75,11 @@ automation:
       - platform: event
         event_type: ios.action_fired
         event_data:
-          actionID: DEB8B98F-B140-47C7-90C0-258EA55C7B49,
-          actionName: Goodnight Camille,
-          sourceDeviceID: kashyyyk,
-          sourceDeviceName: Kashyyyk,
-          sourceDevicePermanentID: 36125E58-99DF-40EA-B840-76BD83C4133D,
+          actionID: DEB8B98F-B140-47C7-90C0-258EA55C7B49
+          actionName: Goodnight Camille
+          sourceDeviceID: kashyyyk
+          sourceDeviceName: Kashyyyk
+          sourceDevicePermanentID: 36125E58-99DF-40EA-B840-76BD83C4133D
     condition: []
     action:
       - alias: "Activate goodnight camille"
