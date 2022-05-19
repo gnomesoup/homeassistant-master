@@ -34,13 +34,14 @@ automation:
       - variables:
           from_state: "{{ trigger.from_state.state }}"
           to_state: "{{ trigger.to_state.state }}"
+          total: "{{ trigger.to_state.state - trigger.from_state.state }}"
       - alias: "Determine point status"
         choose:
         - conditions:
-            - "{{ to_state - from_state == 1 }}"
+            - "{{ total > 0 }}"
           sequence:
             - alias: "Notify point awarded"
               service: notify.michael
               data:
                 title: Rewards
-                message: "Point awarded! Point total is {{ to_state }}"
+                message: "{{ total }} point(s) awarded! Point total is {{ to_state }}"
