@@ -23,3 +23,23 @@ automation:
         service: input_number.increment
         target:
           entity_id: input_number.camille_reward_points
+
+  - id: fd05679b-8582-4a01-b583-aad5ccd5997a
+    alias: Point notification
+    trigger:
+      - platform: state
+        entity_id: input_number.camille_reward_points
+    action:
+      - variables:
+          from_state: "{{ trigger.from_state }}"
+          to_state: "{{ trigger.to_state }}"
+      - alias: "Determine point status"
+        choose:
+        - conditions:
+            - "{{ to_state - from_state == 1 }}"
+          sequence:
+            - alias: "Notify point awarded"
+              service: notify.michael
+              data:
+                title: Rewards
+                message: "Point awarded!"
