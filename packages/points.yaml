@@ -33,7 +33,7 @@ automation:
       - variables:
           from_state: "{{ trigger.from_state.state }}"
           to_state: "{{ trigger.to_state.state }}"
-          total: "{{ trigger.to_state.state - trigger.from_state.state }}"
+          total: "{{ trigger.to_state.state|int - trigger.from_state.state|int }}"
       - alias: "Determine point status"
         choose:
         - conditions:
