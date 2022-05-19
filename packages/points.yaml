@@ -5,6 +5,7 @@ input_number:
     min: 0
     max: 100
     step: 1
+    mode: box
 
 automation:
   - id: 74647280-16cd-4ef8-ab5c-0165287ec715
