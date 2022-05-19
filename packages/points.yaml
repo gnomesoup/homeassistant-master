@@ -1,0 +1,24 @@
+input_number:
+  camille_reward_points:
+    name: Reward Points
+    icon: mdi:star
+    min: 0
+    max: 100
+    step: 1
+
+automation:
+  - id: 74647280-16cd-4ef8-ab5c-0165287ec715
+    alias: Increment points on aqara button click
+    trigger:
+      - platform: state
+        entity_id: input_boolean.nht_aqara_button_1_single
+    condition:
+      - alias: "condition alias (name)"
+        condition: numeric_state
+        entity_id: input_number.camille_reward_points
+        below: 100
+    action:
+      - alias: "increment point"
+        service: input_number.increment
+        target:
+          entity_id: input_number.camille_reward_points
