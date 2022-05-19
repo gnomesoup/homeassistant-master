@@ -31,8 +31,8 @@ automation:
         entity_id: input_number.camille_reward_points
     action:
       - variables:
-          from_state: "{{ trigger.from_state }}"
-          to_state: "{{ trigger.to_state }}"
+          from_state: "{{ trigger.from_state.state }}"
+          to_state: "{{ trigger.to_state.state }}"
       - alias: "Determine point status"
         choose:
         - conditions:
