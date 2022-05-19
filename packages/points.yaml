@@ -29,6 +29,7 @@ automation:
     trigger:
       - platform: state
         entity_id: input_number.camille_reward_points
+        for: "00:00:01"
     action:
       - variables:
           from_state: "{{ trigger.from_state.state }}"
