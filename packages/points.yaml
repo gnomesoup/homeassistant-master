@@ -36,7 +36,7 @@ automation:
       - alias: "Determine point status"
         choose:
         - conditions:
-            - "{{ to_state > 1 }}"
+            - "{{ to_state - from_state == 1 }}"
           sequence:
             - alias: "Notify point awarded"
               service: notify.michael
