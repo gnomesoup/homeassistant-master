@@ -32,6 +32,7 @@ remote_homeassistant:
       subscribe_events:
         - state_changed
         - sevice_registered
+        - zha_event
 
 homeassistant:
   packages: !include_dir_named packages/

@@ -13,12 +13,18 @@ automation:
     trigger:
       - platform: state
         entity_id: input_boolean.nht_aqara_button_1_single
+        from: "off"
+        to: "on"
     condition:
       - alias: "condition alias (name)"
         condition: numeric_state
         entity_id: input_number.camille_reward_points
         below: 100
     action:
+      - alias: "turn nht button trigger back off"
+        service: homeassistant.turn_off
+        target:
+          entity_id: input_boolean.nht_aqara_button_1_single
       - alias: "increment point"
         service: input_number.increment
         target:
